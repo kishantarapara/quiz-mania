@@ -32,7 +32,12 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [selectedCategory, setSelectedCategory] = useState<QuizCategory | null>(
     null
   );
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
+    () => {
+      const savedIndex = localStorage.getItem("currentQuestionIndex");
+      return savedIndex ? Number.parseInt(savedIndex, 10) : 0;
+    }
+  );
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [isQuizStarted, setIsQuizStarted] = useState<boolean>(false);
   const [isQuizFinished, setIsQuizFinished] = useState<boolean>(false);

@@ -28,14 +28,14 @@ function TickIcon({ variant = "primary" }: { variant?: variantType }) {
         height="96"
         rx="48"
         fill={color}
-        fill-opacity={variant === "primary" ? "1" : "0.1"}
+        fillOpacity={variant === "primary" ? "1" : "0.1"}
       />
       <path
         d="M28.5 51L41 63.5L68.5 36"
         stroke={variant === "primary" ? "#FFFFFF" : color}
-        stroke-width="8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
