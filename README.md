@@ -7,7 +7,7 @@ Follow these steps to set up and run the project:
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kishantarapara/quiz-mania
 cd quiz-mania
 ```
 
@@ -20,7 +20,7 @@ npm install
 3. Start the application:
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## Problem Statement
