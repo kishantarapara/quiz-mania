@@ -35,3 +35,4 @@ The following tasks have been completed:
 - [ ] User interface for displaying quiz questions.
 - [ ] Functionality to submit answers and display results.
 - [ ] Responsive design for various screen sizes.
+- [ ] Highlighting Correct/Incorrect Answers.
