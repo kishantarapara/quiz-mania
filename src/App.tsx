@@ -1,7 +1,9 @@
+import AppRouter from "./router/AppRouter";
+
 import "./App.css";
 
 function App() {
-  return <div>Quiz Mania</div>;
+  return <AppRouter />;
 }
 
 export default App;
