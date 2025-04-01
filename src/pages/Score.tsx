@@ -26,7 +26,7 @@ export function Score() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-12 text-center">
-        <ScoreCard score={80} />
+        <ScoreCard score={result.score} />
 
         <div className="border border-neutral-200 rounded-lg p-8 mb-12">
           <h3 className="text-xl font-medium text-primary-dark mb-4">

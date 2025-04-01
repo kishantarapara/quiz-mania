@@ -1,6 +1,6 @@
-import greenTickIcon from "../assets/greenTickIcon.svg";
-import wellDoneIcon from "../assets/wellDoneIcon.svg";
-import lowScoreIcon from "../assets/lowScoreIcon.svg";
+import TickIcon from "../icons/TickIcon";
+import WellDoneIcon from "../icons/WellDoneIcon";
+import LowScoreIcon from "../icons/LowScoreIcon";
 
 interface ScoreCardProps {
   score: number;
@@ -29,11 +29,11 @@ const ScoreCard = ({ score }: ScoreCardProps) => {
 
   const getScoreIcon = () => {
     if (score >= 80) {
-      return greenTickIcon;
+      return <TickIcon variant="success" />;
     } else if (score >= 60) {
-      return wellDoneIcon;
+      return <WellDoneIcon />;
     } else {
-      return lowScoreIcon;
+      return <LowScoreIcon />;
     }
   };
 
@@ -41,12 +41,8 @@ const ScoreCard = ({ score }: ScoreCardProps) => {
   return (
     <div>
       <div className="mb-8">
-        <div className="w-20 h-20 text-primary rounded-full bg-neutral-100 mx-auto flex items-center justify-center">
-          <img
-            src={getScoreIcon()}
-            alt={getPerformanceMessage()}
-            className="w-20 h-20"
-          />
+        <div className="w-20 h-20 text-red rounded-full bg-neutral-100 mx-auto flex items-center justify-center">
+          {getScoreIcon()}
         </div>
       </div>
 

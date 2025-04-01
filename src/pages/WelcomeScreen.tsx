@@ -6,7 +6,7 @@ import { useQuizContext } from "../context/QuizContext";
 import { Logo } from "../components/Logo";
 import { quizCategories } from "../data/quizData";
 import QuizRules from "../components/QuizRules";
-import TickMark from "../components/TickMark";
+import SelectOptions from "../components/SelectOptions";
 
 export function WelcomeScreen() {
   const navigate = useNavigate();
@@ -87,11 +87,11 @@ export function WelcomeScreen() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {quizCategories.map((category) => (
-                <CategoryOption
+                <SelectOptions
                   key={category.id}
                   id={category.id}
                   name={category.name}
-                  selectedId={selectedCategory?.id}
+                  selectedId={selectedCategory?.id ?? null}
                   onSelect={() => selectCategory(category.id)}
                 />
               ))}
@@ -113,42 +113,6 @@ export function WelcomeScreen() {
       </main>
 
       {showRules && <QuizRules onClose={() => setShowRules(false)} />}
-    </div>
-  );
-}
-
-interface CategoryOptionProps {
-  id: string;
-  name: string;
-  selectedId: string | undefined;
-  onSelect: (id: string) => void;
-}
-
-function CategoryOption({
-  id,
-  name,
-  selectedId,
-  onSelect,
-}: CategoryOptionProps) {
-  const isSelected = id === selectedId;
-
-  return (
-    <div
-      onClick={() => onSelect(id)}
-      className={`border rounded-md p-4 flex items-center cursor-pointer transition-colors ${
-        isSelected
-          ? "border-primary"
-          : "border-neutral-300 hover:border-neutral-400"
-      }`}
-    >
-      <div
-        className={`w-6 h-6 rounded-full border flex items-center justify-center mr-3 ${
-          isSelected ? "border-primary bg-primary" : "border-neutral-400"
-        }`}
-      >
-        {isSelected && <TickMark />}
-      </div>
-      <span className="text-primary-dark">{name}</span>
     </div>
   );
 }

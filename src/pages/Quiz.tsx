@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { useQuizContext } from "../context/QuizContext";
 import { Logo } from "../components/Logo";
-import TickMark from "../components/TickMark";
+import SelectOptions from "../components/SelectOptions";
 
 export function Quiz() {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ export function Quiz() {
   } = useQuizContext();
 
   const [timeLeft, setTimeLeft] = useState(10);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const timerRef = useRef<number | null>(null);
 
@@ -36,13 +37,16 @@ export function Quiz() {
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
-
-    if (isLastQuestion) {
-      finishQuiz();
-      navigate("/score");
-    } else {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+    setShowAnswer(true);
+    setTimeout(() => {
+      setShowAnswer(false);
+      if (isLastQuestion) {
+        finishQuiz();
+        navigate("/score");
+      } else {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      }
+    }, 2000);
   }, [
     currentQuestionIndex,
     finishQuiz,
@@ -143,27 +147,22 @@ export function Quiz() {
         </div>
 
         <div className="space-y-4 mb-8">
-          {question.options.map((option, index) => (
-            <div
-              key={index}
-              onClick={() => handleOptionSelect(option)}
-              className={`border rounded-md p-4 flex items-start cursor-pointer transition-colors ${
-                selectedOption === option
-                  ? "border-primary"
-                  : "border-neutral-300 hover:border-neutral-400"
-              }`}
-            >
-              <div
-                className={`w-6 h-6 rounded-full border flex-shrink-0 flex items-center justify-center mt-0.5 mr-3 ${
-                  selectedOption === option
-                    ? "border-primary bg-primary"
-                    : "border-neutral-400"
-                }`}
-              >
-                {selectedOption === option && <TickMark />}
-              </div>
-              <span className="text-primary-dark">{option}</span>
-            </div>
+          {question.options.map((option) => (
+            <SelectOptions
+              key={option}
+              id={option}
+              name={option}
+              onSelect={() => handleOptionSelect(option)}
+              selectedId={selectedOption ?? null}
+              // Disable option selection when showing answer
+              disabled={showAnswer}
+              isCorrect={showAnswer && question.correctAnswer === option}
+              isWrong={
+                showAnswer &&
+                question.correctAnswer !== option &&
+                option === selectedOption
+              }
+            />
           ))}
         </div>
 
